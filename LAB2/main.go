@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"newage/LAB2/mathutil"
-	"newage/LAB2/strop"
+	"LAB2/mathutil"
+	"LAB2/strop"
 )
 
 func main() {
