@@ -1,0 +1,128 @@
+//1. Marks Percentage, Division Classification (Exp 9).
+File upload
+MEDIUM
+3 marks
+Write an F# program that:
+
+(1) reads marks for four subjects, computes the percentage, determines the division using pattern matching — ≥60 → First Division, 50–59 → Second Division, 40–49 → Third Division, <40 → Fail;
+
+//2. Checks whether a given integer is prime
+File upload
+MEDIUM
+3 marks
+Write an F# program that:
+
+(1) checks whether a given integer is prime using a recursive or functional approach. Use functional style throughout. Test with at least three sets of inputs.
+
+//3. String Processing with Pattern Matching (Exp 10)
+File upload
+MEDIUM
+4 marks
+Write an F# program demonstrating three string-processing tasks:
+
+(1) reverse a string and check if it is a palindrome;
+
+(2) transform a string — convert to uppercase if entirely alphabetic, double if entirely numeric, leave unchanged if mixed; and
+
+(3) validate an email address format using F# pattern matching or the Regex library.
+
+(4) Demonstrate each with at least three test inputs.
+
+
+printfn "Enter marks for four subjects:"
+
+let m1 = int (System.Console.ReadLine())
+let m2 = int (System.Console.ReadLine())
+let m3 = int (System.Console.ReadLine())
+let m4 = int (System.Console.ReadLine())
+
+// Calculate percentage
+let total = m1 + m2 + m3 + m4
+let percentage = float total / 4.0
+
+// Determine division using pattern matching
+let division =
+    match percentage with
+    | p when p >= 60.0 -> "First Division"
+    | p when p >= 50.0 -> "Second Division"
+    | p when p >= 40.0 -> "Third Division"
+    | _ -> "Fail"
+
+// Display results
+printfn "Total Marks = %d" total
+printfn "Percentage = %.2f%%" percentage
+printfn "Division = %s" division
+
+
+
+-------------------------------------------------------------------------------------
+
+
+// Function to check prime number using recursion
+let rec isPrime n divisor =
+    if n <= 1 then false
+    elif divisor * divisor > n then true
+    elif n % divisor = 0 then false
+    else isPrime n (divisor + 1)
+
+// Test three different inputs
+let numbers = [7; 10; 13]
+
+numbers
+|> List.iter (fun n ->
+    if isPrime n 2 then
+        printfn "%d is a Prime Number" n
+    else
+        printfn "%d is Not a Prime Number" n
+)
+
+-------------------------------------------------------------------------------------------
+
+open System
+open System.Text.RegularExpressions
+
+// (1) Reverse a string and check palindrome
+let reverseString (s: string) =
+    new string(Array.rev (s.ToCharArray()))
+
+let isPalindrome (s: string) =
+    s = reverseString s
+
+// (2) Transform string based on its content
+let transformString (s: string) =
+    if s |> Seq.forall Char.IsLetter && s <> "" then
+        s.ToUpper()
+    elif s <> "" && s |> Seq.forall Char.IsDigit then
+        s + s
+    else
+        s
+
+// (3) Validate email using Regex
+let isValidEmail (email: string) =
+    Regex.IsMatch(email, @"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$")
+
+// Test 1: Palindrome
+printfn "Palindrome Tests:"
+["madam"; "hello"; "level"]
+|> List.iter (fun s ->
+    printfn "%s -> Reverse: %s, Palindrome: %b"
+        s (reverseString s) (isPalindrome s))
+
+// Test 2: String Transformation
+printfn "\nTransformation Tests:"
+["hello"; "1234"; "abc123"]
+|> List.iter (fun s ->
+    printfn "%s -> %s" s (transformString s))
+
+// Test 3: Email Validation
+printfn "\nEmail Validation Tests:"
+["abc@gmail.com"; "user@yahoo.in"; "invalid-email"]
+|> List.iter (fun email ->
+    printfn "%s -> %b" email (isValidEmail email))
+
+
+
+
+
+
+
