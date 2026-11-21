@@ -1,0 +1,138 @@
+1. Kotlin Basics — Hello World, Employee Bonus, and Digit Average (Exp 25)
+2 marks
+Write Kotlin programs for three tasks:
+
+(1) print "Hello Kotlin!!!";
+
+(2) compute an employee bonus based on dept_code and years of experience — define at least three departments with different bonus rules (e.g., IT + >5 yrs → 20%, HR + >3 yrs → 15%, others → 10%) and display the computed bonus amount using the when expression;
+
+(3) read an integer from user input and compute and display the average of its individual digits.
+
+2. Function Declarations — Default, Named, Vararg, and Higher-Order (Exp 26)
+4 marks
+Write a Kotlin program demonstrating four types of function declarations:
+
+(1) a function with at least two default parameters — call it with and without providing those defaults;
+
+(2) the same or another function called using named arguments (passing arguments out of order);
+
+(3) a function with vararg to accept a variable number of Int arguments and print them all; and
+
+(4) a higher-order function that takes a lambda (Int) -> Int as a parameter and applies it to a list of integers.
+
+3. Student Class — Properties, Constructors, and Methods (Exp 27)
+4 marks
+Define a Kotlin class named Student with properties: rollNo (Int), name (String), course (String), and percentage (Double).
+
+Use a primary constructor to initialize all properties.
+
+Add two member functions: one to accept/update student data from user input, and one to display all details in a formatted manner.
+
+Apply appropriate access modifiers.
+
+Instantiate at least two Student objects in main() and call both functions on each.
+
+
+--------------------------------------------------------------------------------------------------------
+
+
+fun main() {
+    print("Enter department code (IT/HR/SALES): ")
+    val dept = readLine()!!.uppercase()
+
+    print("Enter years of experience: ")
+    val years = readLine()!!.toInt()
+
+    print("Enter employee salary: ")
+    val salary = readLine()!!.toDouble()
+
+    val bonusPercent = when {
+        dept == "IT" && years > 5 -> 20
+        dept == "HR" && years > 3 -> 15
+        dept == "SALES" -> 12
+        else -> 10
+    }
+
+    val bonus = salary * bonusPercent / 100
+
+    println("Bonus Percentage: $bonusPercent%")
+    println("Bonus Amount: $bonus")
+}
+
+--------------------------------------------------------------------------------------------------------------
+
+
+fun main() {
+    print("Enter an integer: ")
+    var num = kotlin.math.abs(readLine()!!.toInt())
+
+    var sum = 0
+    var count = 0
+
+    if (num == 0) {
+        count = 1
+    }
+
+    while (num > 0) {
+        val digit = num % 10
+        sum += digit
+        count++
+        num /= 10
+    }
+
+    val average = sum.toDouble() / count
+
+    println("Sum of digits: $sum")
+    println("Average of digits: $average")
+}
+------------------------------------------------------------------------------------------------------------------
+
+
+class Student(
+    private var rollNo: Int,
+    private var name: String,
+    private var course: String,
+    private var percentage: Double
+) {
+
+    // Function to accept/update student data
+    fun acceptData() {
+        print("Enter Roll Number: ")
+        rollNo = readLine()!!.toInt()
+
+        print("Enter Name: ")
+        name = readLine()!!
+
+        print("Enter Course: ")
+        course = readLine()!!
+
+        print("Enter Percentage: ")
+        percentage = readLine()!!.toDouble()
+    }
+
+    // Function to display student details
+    fun displayData() {
+        println("\n----- Student Details -----")
+        println("Roll Number: $rollNo")
+        println("Name: $name")
+        println("Course: $course")
+        println("Percentage: $percentage%")
+    }
+}
+
+fun main() {
+
+    // Creating first Student object
+    val s1 = Student(0, "", "", 0.0)
+    println("Enter details of Student 1:")
+    s1.acceptData()
+    s1.displayData()
+
+    // Creating second Student object
+    val s2 = Student(0, "", "", 0.0)
+    println("\nEnter details of Student 2:")
+    s2.acceptData()
+    s2.displayData()
+}
+
+---------------------------------------------------------------------------------
