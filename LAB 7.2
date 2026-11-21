@@ -1,0 +1,43 @@
+///2. Higher-Order Functions: List.map, List.filter, and List.fold (Exp 12)
+File upload
+MEDIUM
+Write F# programs demonstrating three higher-order functions using pure lambda expressions:
+
+(1) List.map — transform each element (e.g., square all integers);
+
+(2) List.filter — select elements satisfying a predicate (e.g., retain only even numbers);
+
+(3) List.fold or List.reduce — aggregate a list (e.g., compute sum, product, or maximum).
+
+(4) Test each on at least two different lists and print results.
+
+CODE HERE: 
+// (1) List.map - Square each element
+let squareList lst =
+    List.map (fun x -> x * x) lst
+
+// (2) List.filter - Select even numbers
+let evenList lst =
+    List.filter (fun x -> x % 2 = 0) lst
+
+// (3) List.fold - Calculate sum of elements
+let sumList lst =
+    List.fold (fun acc x -> acc + x) 0 lst
+
+// Test List 1
+let list1 = [1; 2; 3; 4; 5]
+
+// Test List 2
+let list2 = [2; 4; 6; 8]
+
+// Print results for List 1
+printfn "List 1: %A" list1
+printfn "Squares: %A" (squareList list1)
+printfn "Even Numbers: %A" (evenList list1)
+printfn "Sum: %d" (sumList list1)
+
+// Print results for List 2
+printfn "\nList 2: %A" list2
+printfn "Squares: %A" (squareList list2)
+printfn "Even Numbers: %A" (evenList list2)
+printfn "Sum: %d" (sumList list2)
